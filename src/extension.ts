@@ -1,26 +1,36 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+	const disposable = vscode.commands.registerCommand('paste-as-markdown-codeblock.paste', async () => {
+		const clipboardText = await vscode.env.clipboard.readText();
+		if (!clipboardText) {
+			vscode.window.showWarningMessage('クリップボードが空です．');
+			return;
+		}
+		const language = 'plaintext';
+		console.log('Clipboard Text:', clipboardText);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "paste-as-markdown-codeblock" is now active!');
+		// Markdownコードブロック形式に整形
+		const formatted = `\`\`\`${language}\n${clipboardText}\n\`\`\``;
+		console.log('Formatted Markdown Code Block:');
+		console.log(formatted);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('paste-as-markdown-codeblock.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from paste-as-markdown-codeblock!');
+		// アクティブエディタに挿入
+		const editor = vscode.window.activeTextEditor;
+		if (editor) {
+			console.log('アクティブなファイルが見つかりました．', editor.document.fileName, editor.document.languageId);
+			const selection = editor.selection;
+			console.log('Current Selection:', selection);
+			editor.edit(editBuilder => {
+				editBuilder.replace(selection, formatted);
+			});
+			vscode.window.showInformationMessage('クリップボードの内容をMarkdownコードブロックとして挿入しました．');
+		} else {
+			vscode.window.showErrorMessage('アクティブなファイルが見つかりませんでした．');
+		}
 	});
 
 	context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

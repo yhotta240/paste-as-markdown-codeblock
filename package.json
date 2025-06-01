@@ -14,8 +14,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "paste-as-markdown-codeblock.helloWorld",
-        "title": "Hello World"
+        "command": "paste-as-markdown-codeblock.paste",
+        "title": "Paste as Markdown Code Block"
       }
     ]
   },
