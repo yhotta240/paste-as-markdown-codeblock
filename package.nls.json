@@ -1,0 +1,8 @@
+{
+  "config.title": "Paste as Markdown CodeBlock",
+  "config.defaultLanguage.description": "Default language for code blocks",
+  "config.languages.description": "List of languages for code blocks",
+  "message.clipboardEmpty": "Clipboard is empty.",
+  "message.pasteSuccess": "Inserted clipboard content as Markdown code block.",
+  "message.noActiveEditor": "No active editor found."
+}

@@ -1,12 +1,18 @@
 import * as vscode from 'vscode';
+import localeEn from "../package.nls.json";
+import localeJa from "../package.nls.ja.json";
 import { languages, defaultLanguages } from './utils/config';
+
+const locale = vscode.env.language;
+const localeObj: { [key: string]: typeof localeEn } = { en: localeEn, ja: localeJa };
+const messages = (localeObj[locale] ?? localeEn) as Record<string, string>;
 
 export function registerPasteCommand(context: vscode.ExtensionContext) {
     const disposable = vscode.commands.registerCommand('paste-as-markdown-codeblock.paste', async () => {
         const clipboardText = await vscode.env.clipboard.readText();
 
         if (!clipboardText) {
-            vscode.window.showWarningMessage('クリップボードが空です．');
+            vscode.window.showWarningMessage(messages["message.clipboardEmpty"]);
             return;
         }
         if (!languages.length) { languages.push(defaultLanguages); }
@@ -26,9 +32,9 @@ export function registerPasteCommand(context: vscode.ExtensionContext) {
         const editor = vscode.window.activeTextEditor;
         if (editor) {
             editor.insertSnippet(snippet);
-            vscode.window.showInformationMessage('クリップボードの内容をMarkdownコードブロックとして挿入しました．');
+            vscode.window.showInformationMessage(messages["message.pasteSuccess"]);
         } else {
-            vscode.window.showErrorMessage('アクティブなファイルが見つかりませんでした．');
+            vscode.window.showErrorMessage(messages["message.noActiveEditor"]);
         }
     });
     context.subscriptions.push(disposable);

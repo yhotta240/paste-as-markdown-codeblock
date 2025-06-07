@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "paste-as-markdown-codeblock.paste",
-        "title": "Paste as Markdown Code Block"
+        "title": "%config.title%"
       }
     ],
     "keybindings": [
@@ -29,12 +29,12 @@
       }
     ],
     "configuration": {
-      "title": "Paste as Markdown Codeblock",
+      "title": "%config.title%",
       "properties": {
         "pasteAsMarkdownCodeblock.defaultLanguage": {
           "type": "string",
           "default": "plaintext",
-          "description": "デフォルトのコードブロック言語"
+          "description": "%config.defaultLanguage.description%"
         },
         "pasteAsMarkdownCodeblock.languages": {
           "type": "array",
@@ -53,7 +53,7 @@
             "css",
             "json"
           ],
-          "description": "コードブロックの言語候補リスト"
+          "description": "%config.languages.description%"
         }
       }
     },
