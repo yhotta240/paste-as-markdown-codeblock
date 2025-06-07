@@ -1,18 +1,15 @@
 import * as vscode from 'vscode';
-import languages from './utils/config';
+import { languages } from './utils/config';
 
-export function registerMarkdownCompletionProvider(context: vscode.ExtensionContext) {
+export function registerCompletionProvider(context: vscode.ExtensionContext) {
     const provider = vscode.languages.registerCompletionItemProvider(
         { scheme: 'file', language: 'markdown' },
         {
             provideCompletionItems(document, position) {
                 const lineText = document.lineAt(position).text;
-                console.log('Completion requested at:', lineText);
-
-                if (!lineText.includes('```')) {
+                if (!lineText.startsWith('```')) {
                     return undefined;
                 }
-
                 return languages.map(lang => {
                     const item = new vscode.CompletionItem(lang, vscode.CompletionItemKind.Value);
                     item.insertText = lang;
@@ -20,8 +17,7 @@ export function registerMarkdownCompletionProvider(context: vscode.ExtensionCont
                 });
             }
         },
-        '`', ...'abcdefghijklmnopqrstuvwxyz',
-        ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        '`', ...'abcdefghijklmnopqrstuvwxyz'.split('')
     );
     context.subscriptions.push(provider);
 }

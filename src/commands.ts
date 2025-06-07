@@ -1,12 +1,20 @@
 import * as vscode from 'vscode';
-import languages from './utils/config';
+import { languages, defaultLanguages } from './utils/config';
 
 export function registerPasteCommand(context: vscode.ExtensionContext) {
     const disposable = vscode.commands.registerCommand('paste-as-markdown-codeblock.paste', async () => {
         const clipboardText = await vscode.env.clipboard.readText();
+
         if (!clipboardText) {
             vscode.window.showWarningMessage('クリップボードが空です．');
             return;
+        }
+        if (!languages.length) { languages.push(defaultLanguages); }
+        if (languages.includes(defaultLanguages)) {
+            languages.splice(languages.indexOf(defaultLanguages), 1);
+            languages.unshift(defaultLanguages);
+        } else {
+            languages.unshift(defaultLanguages);
         }
 
         const snippet = new vscode.SnippetString(
@@ -17,9 +25,6 @@ export function registerPasteCommand(context: vscode.ExtensionContext) {
 
         const editor = vscode.window.activeTextEditor;
         if (editor) {
-            console.log('アクティブなファイルが見つかりました．', editor.document.fileName, editor.document.languageId);
-            const selection = editor.selection;
-            console.log('Current Selection:', selection);
             editor.insertSnippet(snippet);
             vscode.window.showInformationMessage('クリップボードの内容をMarkdownコードブロックとして挿入しました．');
         } else {

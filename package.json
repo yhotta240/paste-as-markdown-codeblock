@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:paste-as-markdown-codeblock.languages"
+    "onLanguage:paste-as-markdown-codeblock.languages",
+    "onLanguage:markdown"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -30,6 +31,11 @@
     "configuration": {
       "title": "Paste as Markdown Codeblock",
       "properties": {
+        "pasteAsMarkdownCodeblock.defaultLanguage": {
+          "type": "string",
+          "default": "plaintext",
+          "description": "デフォルトのコードブロック言語"
+        },
         "pasteAsMarkdownCodeblock.languages": {
           "type": "array",
           "items": {
