@@ -56,6 +56,15 @@
           "description": "コードブロックの言語候補リスト"
         }
       }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "paste-as-markdown-codeblock.paste",
+          "group": "9_cutcopypaste@5",
+          "when": "editorTextFocus || editorHasSelection"
+        }
+      ]
     }
   },
   "scripts": {
