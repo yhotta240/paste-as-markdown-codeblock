@@ -3,7 +3,7 @@
   "displayName": "paste-as-markdown-codeblock",
   "description": "This is a VS Code extension that pastes copied code into the editor as a Markdown-formatted code block.",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "yhotta240",
   "icon": "images/icon.png",
   "engines": {
