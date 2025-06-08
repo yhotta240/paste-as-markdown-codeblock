@@ -48,4 +48,8 @@ This extension follows the official VS Code extension development guidelines.
 
 - [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
 
+## License
+
+This extension is licensed under the [MIT License](./LICENSE).
+
 Thanks for using this extension! Feel free to report bugs or request features via the Issues page.
