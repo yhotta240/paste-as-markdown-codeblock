@@ -36,7 +36,7 @@
       }
     ],
     "configuration": {
-      "title": "%config.title%",
+      "title": "Paste as Markdown CodeBlock",
       "properties": {
         "pasteAsMarkdownCodeblock.defaultLanguage": {
           "type": "string",
