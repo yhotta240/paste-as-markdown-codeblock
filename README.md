@@ -4,36 +4,63 @@
 
 ## Features
 
-- Convert selected text into a Markdown code block (```language)
-and paste it using `Ctrl+Alt+V`
+- Paste the copied code as a Markdown code block using `Ctrl+Alt+V`
 
-- Use `Ctrl+Space` to insert a language identifier (e.g., JavaScript, Python, TypeScript)
+- Press `Ctrl+Space` to enter a language identifier (e.g., `JavaScript`, `Python`, `TypeScript`).
 
-- Right-click in the editor and select "Paste as Markdown CodeBlock" to execute easily
+- Right-click in the editor and select "Paste as Markdown CodeBlock" to use the command from the context menu.
 
 <br>
 <img src="https://lh3.googleusercontent.com/d/146nlX5-7UHnvCKRrJeIbUoIePaCgSC9I" width="600" >
 
 <br>
-⚠️ Note: This extension does not implement automatic language detection. You need to specify the language manually after pasting.
+⚠️ Note: This extension does not support automatic language detection. You must specify the language manually after pasting.
 
 ## Requirements
 
 No special requirements or dependencies are needed.
 
-- Visual Studio Code version 1.xx or higher
+- Visual Studio Code version 1.xx or later
 
 ## Extension Settings
 
-Currently, this extension does not provide any customizable settings.
+This extension provides the following settings:
 
-Configuration options may be added in future updates.
+- `pasteAsMarkdownCodeblock.defaultLanguage`<br>
+Specifies the default language identifier used when pasting a code block.<br>
+Default: `"plaintext"`
+
+- `pasteAsMarkdownCodeblock.languages`<br>
+Defines a list of language identifiers available for selection.
+You can customize this list to include only the languages you frequently use.
+
+Default:
+
+```json
+[
+  "plaintext",
+  "javascript",
+  "typescript",
+  "python",
+  "cpp",
+  "java",
+  "bash",
+  "html",
+  "css",
+  "json"
+]
+```
+
+These settings can be configured from the Settings UI or by editing your `settings.json` file directly.
+
+### Keyboard Shortcut
+Press `Ctrl+Alt+V` to paste the copied code as a Markdown code block (only when the editor is focused).
 
 ## Known Issues
 
-- Some languages may not be correctly identified, causing the inserted language name to be missing or inaccurate.
+- The language name may not always be correctly inserted, depending on the input.
 
-- The command requires selected text. If nothing is selected, no output will be generated.
+- The command requires selected or copied text. If nothing is provided, no output will be generated.
 
 ## Release Notes
 
@@ -52,4 +79,5 @@ This extension follows the official VS Code extension development guidelines.
 
 This extension is licensed under the [MIT License](./LICENSE).
 
-Thanks for using this extension! Feel free to report bugs or request features via the Issues page.
+Thanks for using this extension! <br>
+Feel free to report bugs or request features via the Issues page.
