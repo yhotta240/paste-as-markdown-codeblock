@@ -4,9 +4,11 @@
 
 ## Features
 
+- **Automatic Language Detection**: The extension automatically detects the programming language from your clipboard content and suggests it as the default language for the code block.
+
 - Paste the copied code as a Markdown code block using `Ctrl+Alt+V`
 
-- Press `Ctrl+Space` to enter a language identifier (e.g., `JavaScript`, `Python`, `TypeScript`).
+- Press `Ctrl+Space` to enter a language identifier (e.g., `JavaScript`, `Python`, `TypeScript`) or select from detected/configured languages.
 
 - Right-click in the editor and select "Paste as Markdown CodeBlock" to use the command from the context menu.
 
@@ -14,7 +16,15 @@
 <img src="https://lh3.googleusercontent.com/d/146nlX5-7UHnvCKRrJeIbUoIePaCgSC9I" width="600" >
 
 <br>
-⚠️ Note: This extension does not support automatic language detection. You must specify the language manually after pasting.
+
+### How Language Detection Works
+
+When you paste code, the extension analyzes the clipboard content using keyword and pattern matching to identify the programming language. Supported languages include:
+- Python, JavaScript, TypeScript, Java, C++, Go, Rust, Ruby, PHP
+- Bash, HTML, CSS, JSON, SQL, YAML, XML
+- And more...
+
+If a language is confidently detected, it will be pre-selected in the code block. If detection is uncertain, the extension falls back to your configured default language.
 
 ## Requirements
 
@@ -27,12 +37,13 @@ No special requirements or dependencies are needed.
 This extension provides the following settings:
 
 - `pasteAsMarkdownCodeblock.defaultLanguage`<br>
-Specifies the default language identifier used when pasting a code block.<br>
+Specifies the default language identifier used when pasting a code block if automatic detection fails or is uncertain.<br>
 Default: `"plaintext"`
 
 - `pasteAsMarkdownCodeblock.languages`<br>
 Defines a list of language identifiers available for selection.
 You can customize this list to include only the languages you frequently use.
+The auto-detected language (if any) will be added to this list automatically when pasting.
 
 Default:
 
@@ -63,6 +74,14 @@ Press `Ctrl+Alt+V` to paste the copied code as a Markdown code block (only when 
 - The command requires selected or copied text. If nothing is provided, no output will be generated.
 
 ## Release Notes
+
+### 1.1.0
+
+- **New Feature**: Automatic programming language detection from clipboard content
+  - Detects languages using keyword and pattern matching
+  - Supports 15+ popular programming languages
+  - Falls back to default language when detection is uncertain
+  - Maintains backward compatibility with existing configurations
 
 ### 1.0.0
 
