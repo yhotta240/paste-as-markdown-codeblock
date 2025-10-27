@@ -61,7 +61,7 @@ const languagePatterns: Record<string, LanguagePattern> = {
             /\bpublic\s+static\s+void\s+main/,
             /\bextends\s+\w+/,
             /\bimplements\s+\w+/,
-            /@\w+/,
+            /@(Override|Deprecated|SuppressWarnings|FunctionalInterface)/,
         ],
         weight: 1.0,
     },
@@ -91,7 +91,7 @@ const languagePatterns: Record<string, LanguagePattern> = {
         weight: 1.0,
     },
     rust: {
-        keywords: ['fn ', 'let mut', 'impl ', 'trait ', 'pub ', 'use ', 'match ', '&mut ', 'Some(', 'None'],
+        keywords: ['fn ', 'let mut', 'impl ', 'trait ', 'pub ', 'use ', 'match ', '&mut ', 'Some(', 'Ok(', 'Err('],
         patterns: [
             /\bfn\s+\w+\s*\(/,
             /\blet\s+(mut\s+)?\w+/,
@@ -122,7 +122,7 @@ const languagePatterns: Record<string, LanguagePattern> = {
             /\bfunction\s+\w+\s*\(/,
             /\bclass\s+\w+/,
             /\becho\s+/,
-            /\bnamespace\s+/,
+            /\bnamespace\s+[\w\\]+;/,  // PHP namespaces end with semicolon
         ],
         weight: 1.0,
     },
