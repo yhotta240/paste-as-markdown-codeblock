@@ -1,6 +1,6 @@
 # Paste as Markdown Codeblock
 
-`paste-as-markdown-codeblock` is a Visual Studio Code extension that allows you to paste selected code or text as a Markdown code block.
+`paste-as-markdown-codeblock` is a Visual Studio Code extension that lets you paste code or text from the clipboard as a Markdown code block.
 
 ## Features
 
@@ -25,6 +25,8 @@ When you paste code, the extension analyzes the clipboard content using keyword 
 - And more...
 
 If a language is confidently detected, it will be pre-selected in the code block. If detection is uncertain, the extension falls back to your configured default language.
+
+Note: Automatic language detection is disabled by default. To enable it, turn on `pasteAsMarkdownCodeblock.enableAutoDetection` in your settings.
 
 ## Requirements
 
