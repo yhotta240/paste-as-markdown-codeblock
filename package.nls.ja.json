@@ -2,7 +2,9 @@
   "config.title": "Markdown コードブロックとして貼り付け",
   "config.defaultLanguage.description": "コードブロックのデフォルト言語",
   "config.languages.description": "コードブロックの言語候補リスト",
+  "config.enableAutoDetection.description": "貼り付けたコードの言語を自動検出する",
   "message.clipboardEmpty": "クリップボードが空です．",
   "message.pasteSuccess": "クリップボードの内容を Markdown コードブロックとして挿入しました．",
+  "message.pasteSuccessWithLanguage": "Markdown コードブロックとして挿入しました (検出された言語: {0})．",
   "message.noActiveEditor": "アクティブなファイルが見つかりませんでした．"
 }

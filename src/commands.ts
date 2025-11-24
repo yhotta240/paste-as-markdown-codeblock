@@ -1,7 +1,8 @@
 import * as vscode from 'vscode';
 import localeEn from "../package.nls.json";
 import localeJa from "../package.nls.ja.json";
-import { languages, defaultLanguages } from './utils/config';
+import { languages, defaultLanguages, isAutoDetect } from './utils/config';
+import { detectLanguage } from './utils/languageDetector';
 
 const locale = vscode.env.language;
 const localeObj: { [key: string]: typeof localeEn } = { en: localeEn, ja: localeJa };
@@ -15,16 +16,37 @@ export function registerPasteCommand(context: vscode.ExtensionContext) {
             vscode.window.showWarningMessage(messages["message.clipboardEmpty"]);
             return;
         }
+
+        // Auto-detect language from clipboard content
+        const detectedLanguage = detectLanguage(clipboardText);
+
+        // Prepare language list for snippet
         if (!languages.length) { languages.push(defaultLanguages); }
-        if (languages.includes(defaultLanguages)) {
-            languages.splice(languages.indexOf(defaultLanguages), 1);
-            languages.unshift(defaultLanguages);
+
+        // Create a copy of languages array to avoid modifying the original
+        const snippetLanguages = [...languages];
+
+        // If a language was detected, put it first in the list
+        if (detectedLanguage && isAutoDetect) {
+            // Remove detected language from list if it exists
+            const detectedIndex = snippetLanguages.indexOf(detectedLanguage);
+            if (detectedIndex !== -1) {
+                snippetLanguages.splice(detectedIndex, 1);
+            }
+            // Add detected language at the beginning
+            snippetLanguages.unshift(detectedLanguage);
         } else {
-            languages.unshift(defaultLanguages);
+            // No detection: use default language as first option
+            if (snippetLanguages.includes(defaultLanguages)) {
+                snippetLanguages.splice(snippetLanguages.indexOf(defaultLanguages), 1);
+                snippetLanguages.unshift(defaultLanguages);
+            } else {
+                snippetLanguages.unshift(defaultLanguages);
+            }
         }
 
         const snippet = new vscode.SnippetString(
-            '```${1|' + languages.join(',') + '|}\n' +
+            '```${1|' + snippetLanguages.join(',') + '|}\n' +
             clipboardText +
             '\n```'
         );

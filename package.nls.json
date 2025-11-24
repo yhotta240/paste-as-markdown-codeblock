@@ -2,7 +2,9 @@
   "config.title": "Paste as Markdown CodeBlock",
   "config.defaultLanguage.description": "Default language for code blocks",
   "config.languages.description": "List of languages for code blocks",
+  "config.enableAutoDetection.description": "Enable automatic language detection for pasted code",
   "message.clipboardEmpty": "Clipboard is empty.",
   "message.pasteSuccess": "Inserted clipboard content as Markdown code block.",
+  "message.pasteSuccessWithLanguage": "Inserted as Markdown code block (detected: {0}).",
   "message.noActiveEditor": "No active editor found."
 }
