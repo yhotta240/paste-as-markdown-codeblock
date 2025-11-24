@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import localeEn from "../package.nls.json";
 import localeJa from "../package.nls.ja.json";
-import { languages, defaultLanguages } from './utils/config';
+import { languages, defaultLanguages, isAutoDetect } from './utils/config';
 import { detectLanguage } from './utils/languageDetector';
 
 const locale = vscode.env.language;
@@ -19,15 +19,15 @@ export function registerPasteCommand(context: vscode.ExtensionContext) {
 
         // Auto-detect language from clipboard content
         const detectedLanguage = detectLanguage(clipboardText);
-        
+
         // Prepare language list for snippet
         if (!languages.length) { languages.push(defaultLanguages); }
-        
+
         // Create a copy of languages array to avoid modifying the original
         const snippetLanguages = [...languages];
-        
+
         // If a language was detected, put it first in the list
-        if (detectedLanguage) {
+        if (detectedLanguage && isAutoDetect) {
             // Remove detected language from list if it exists
             const detectedIndex = snippetLanguages.indexOf(detectedLanguage);
             if (detectedIndex !== -1) {
