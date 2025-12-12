@@ -1,5 +1,7 @@
 # Paste as Markdown Codeblock
 
+[日本語版はこちら (Japanese version)](./README.ja.md)
+
 `paste-as-markdown-codeblock` is a Visual Studio Code extension that lets you paste code or text from the clipboard as a Markdown code block.
 
 ## Features
